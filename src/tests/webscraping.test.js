@@ -31,38 +31,38 @@ describe('Testar validações de entrada de data', () => {
     jest.setTimeout(30000);
   });
 
-  it('Deve retornar 200 e disparar um erro que datas não podem ser iguais', async () => {
-    const expected = [{ mensagem: 'A data de saída (CheckOut) deve ser posterior à de entrada (CheckIn).' }];
+  it('Deve retornar 404 e disparar um erro que datas não podem ser iguais', async () => {
+    const expected = { mensagem: 'A data de saída (CheckOut) deve ser posterior à de entrada (CheckIn).' };
     const res = await request.post('/api/buscar').send({ checkin: '01032021', checkout: '01032021' });
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(404);
     expect(res.body).toEqual(expected);
   });
 
-  it('Deve retornar 200 e disparar um erro que o Checkout não pode ser menor que o Checkin', async () => {
-    const expected = [{ mensagem: 'A data de saída (CheckOut) não pode ser anterior a data de entrada (CheckIn)' }];
+  it('Deve retornar 404 e disparar um erro que o Checkout não pode ser menor que o Checkin', async () => {
+    const expected = { mensagem: 'A data de saída (CheckOut) não pode ser anterior a data de entrada (CheckIn)' };
     const res = await request.post('/api/buscar').send({ checkin: '01032021', checkout: '01012021' });
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(404);
     expect(res.body).toEqual(expected);
   });
 
-  it('Deve retornar 200 e disparar um erro que o Checkout não pode ser menor que o Checkin', async () => {
-    const expected = [{ mensagem: 'A data de saída (CheckOut) não pode ser anterior a data de entrada (CheckIn)' }];
+  it('Deve retornar 404 e disparar um erro que o Checkout não pode ser menor que o Checkin', async () => {
+    const expected = { mensagem: 'A data de saída (CheckOut) não pode ser anterior a data de entrada (CheckIn)' };
     const res = await request.post('/api/buscar').send({ checkin: '01032021', checkout: '01012021' });
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(404);
     expect(res.body).toEqual(expected);
   });
 
-  it('Deve retornar 200 e disparar um erro de data invalida', async () => {
-    const expected = [{ mensagem: 'Data inserida não é válida' }];
+  it('Deve retornar 404 e disparar um erro de data invalida', async () => {
+    const expected = { mensagem: 'Data inserida não é válida' };
     const res = await request.post('/api/buscar').send({ checkin: '01xse', checkout: '01012021' });
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(404);
     expect(res.body).toEqual(expected);
   });
 
-  it('Deve retornar 200 e disparar um erro para preencher a entrada', async () => {
-    const expected = [{ mensagem: 'Preencha o CheckIn e ou Checkout.' }];
+  it('Deve retornar 404 e disparar um erro para preencher a entrada', async () => {
+    const expected = { mensagem: 'Preencha o CheckIn e ou Checkout.' };
     const res = await request.post('/api/buscar').send({ checkin: '', checkout: '01012021' });
-    expect(res.status).toBe(200);
+    expect(res.status).toBe(404);
     expect(res.body).toEqual(expected);
   });
 });

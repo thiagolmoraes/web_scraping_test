@@ -18,9 +18,10 @@ const procurarQuartos = async (checkin, checkout) => {
     await page.waitForSelector('div#rooms_results');
     const resultado = await page.evaluate(() => {
       let items = document.querySelectorAll('table.maintable > tbody > tr.roomName > td > div.roomExcerpt');
-      let dados = [];
 
       if (items.length !== 0) {
+        let dados = [];
+
         items.forEach(function (el) {
           let objeto = null;
           el.querySelectorAll('div.excerpt h5 a').forEach(function (el) {
@@ -40,15 +41,16 @@ const procurarQuartos = async (checkin, checkout) => {
         return dados;
       }
 
+      let erro = null;
       document.querySelectorAll('div.noResults div.wrapLeft div.info-message h2').forEach(function (el) {
-        dados.push({ mensagem: el.innerHTML });
+        erro = ({ mensagem: el.innerHTML });
       });
-      return dados;
+      return erro;
     });
     await browser.close();
     return resultado;
   } catch (error) {
-    return [{ mensagem: `Ocorreu um erro durante o carregamento da página! Por favor, tente novamente.${error}` }];
+    return { mensagem: `Ocorreu um erro durante o carregamento da página! Por favor, tente novamente.${error}` };
   }
 };
 
