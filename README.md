@@ -44,10 +44,12 @@ Entrada de dados:
 ````
 cURL:
 
+````
 curl --header "Content-Type: application/json" \
   --request POST \
   --data '{"checkin":"01032021","checkout":"02032021"}' \
   http://localhost:3000/api/buscar
+````
 
 Resposta: 
 
