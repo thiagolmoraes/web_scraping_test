@@ -52,6 +52,4 @@ const procurarQuartos = async (checkin, checkout) => {
   }
 };
 
-// procurarQuartos('17022021', '').then((value) => console.log(value));
-
 module.exports = { procurarQuartos };
