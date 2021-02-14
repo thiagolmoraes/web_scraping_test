@@ -23,13 +23,13 @@ const procurarQuartos = async (checkin, checkout) => {
       if (items.length !== 0) {
         items.forEach(function (el) {
           let objeto = null;
-          el.querySelectorAll('div.excerpt > h5 > a').forEach(function (el) {
+          el.querySelectorAll('div.excerpt h5 a').forEach(function (el) {
             objeto = { quarto: el.innerHTML, img: [] };
           });
-          el.querySelectorAll('div.excerpt > p > a').forEach(function (el) {
+          el.querySelectorAll('div.excerpt p a').forEach(function (el) {
             objeto.descricao = el.innerHTML;
           });
-          el.querySelectorAll('div.sincePrice > div.sincePriceContent > h6.bestPriceTextColor').forEach(function (el) {
+          el.querySelectorAll('div.sincePrice div.sincePriceContent h6.bestPriceTextColor').forEach(function (el) {
             objeto.preco = el.innerHTML;
           });
           el.querySelectorAll('div.thumb div.bx-wrapper div.bx-viewport div.roomSlider div.slide a.fancybox-thumbs img').forEach(function (el) {
