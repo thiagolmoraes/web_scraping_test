@@ -16,7 +16,10 @@ const procurarQuartos = async (checkin, checkout) => {
     const page = await browser.newPage();
     await page.goto(url);
     await page.waitForSelector('div#rooms_results');
-    const resultado = await page.evaluate(() => {
+    const resultado = await page.evaluate(async () => {
+      // Aguarda a página renderizar e o todos valores aparecer aparecer na tela
+      const timeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+      await timeout(5000);
       let items = document.querySelectorAll('table.maintable > tbody > tr.roomName > td > div.roomExcerpt');
 
       if (items.length !== 0) {
