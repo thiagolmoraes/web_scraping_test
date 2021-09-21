@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        //git url: 'https://github.com/thiagolmoraes/web_scraping_test.git'
+        git url: 'https://github.com/thiagolmoraes/web_scraping_test.git'
         checkout scm
         sh 'ls -lat'
       }
