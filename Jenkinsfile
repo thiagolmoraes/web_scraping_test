@@ -16,16 +16,8 @@ pipeline {
     }
     stage('Build') {
       steps{
-        step(
-          [
-            $class: 'DockerComposeBuilder', 
-            dockerComposeFile: 'docker-compose.yml', 
-            option: [
-              $class: 'StartAllServices'
-              ], 
-            useCustomDockerComposeFile: true
-            ]
-          )
+         sh "docker-compose down"
+         sh "docker-compose up -d"
       }
     }
   }
