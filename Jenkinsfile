@@ -8,16 +8,20 @@ pipeline {
         sh 'ls -lat'
       }
     }
-    stage('Before Build') {
-      steps {
-        //sh 'bash before_deploy.sh'
-        echo 'Before Build'
-      }
-    }
     stage('Build') {
       steps{
          sh "docker-compose down"
          sh "docker-compose up -d"
+      }
+    }
+    stage('Test'){
+      steps{
+        echo 'Testing...'
+        snykSecurity(
+          snykInstallation: '/usr/local/bin/snyk',
+          snykTokenId: '6637029e-9365-425b-bc1e-34486faba28b',
+          // place other parameters here
+        )
       }
     }
   }
