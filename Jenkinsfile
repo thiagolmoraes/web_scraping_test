@@ -10,8 +10,8 @@ pipeline {
     }
     stage('Build') {
       steps{
-         sh "docker-compose down"
-         sh "docker-compose up -d"
+         sh "/usr/bin/docker-compose down"
+         sh "/usr/bin/docker-compose up -d"
       }
     }
     stage('Test'){
@@ -19,7 +19,7 @@ pipeline {
         echo 'Testing...'
         snykSecurity(
           snykInstallation: '/usr/bin/snyk',
-          snykTokenId: '',
+          snykTokenId: 'https://github.com/thiagolmoraes/web_scraping_test.git',
           // place other parameters here
         )
       }
